@@ -3,27 +3,152 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Compacto — Legal</title>
+<title>Compacto — Shrink PDFs on your iPhone, fully offline</title>
+<meta name="description" content="Compacto compresses PDFs entirely on your device. No uploads, no servers — just smaller files with crisp quality.">
+<meta property="og:title" content="Compacto — PDF Compressor, Offline">
+<meta property="og:description" content="Shrink PDFs right on your iPhone. 100% on-device, instant, private.">
+<meta property="og:image" content="https://kreatifsayfa.github.io/compacto-legal/icon.png">
 <style>
-  :root { --accent:#E8412A; --ink:#1A1A1A; --muted:#6B6B6B; --bg:#F2F1EE; }
-  body { margin:0; background:var(--bg); color:var(--ink); text-align:center;
-    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
-  .wrap { max-width:560px; margin:0 auto; padding:80px 22px; }
-  h1 { font-size:34px; margin:0 0 8px; }
-  .muted { color:var(--muted); }
-  a.btn { display:block; margin:14px 0; padding:16px; background:#fff; border:1px solid #E3E1DB;
-    border-radius:16px; text-decoration:none; color:var(--ink); font-weight:600; }
-  .pill { display:inline-block; background:var(--accent); color:#fff; font-weight:700;
-    padding:4px 14px; border-radius:999px; }
+  :root{
+    --accent:#E8412A; --accent2:#CC2E1E; --ink:#1A1A1A; --muted:#6B6B6B;
+    --bg:#F2F1EE; --card:#FBFAF7; --line:#E7E4DD;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);
+    font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+
+  /* nav */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
+  .brand img{width:30px;height:30px;border-radius:8px}
+  .nav-links a{color:var(--muted);font-size:15px;margin-left:20px}
+  .nav-links a:hover{color:var(--ink)}
+
+  /* hero */
+  .hero{text-align:center;padding:48px 0 56px}
+  .hero img.icon{width:108px;height:108px;border-radius:24px;box-shadow:0 18px 40px rgba(232,65,42,.28);margin-bottom:26px}
+  .hero h1{font-size:clamp(34px,6vw,58px);line-height:1.05;letter-spacing:-.02em;font-weight:850}
+  .hero p.sub{max-width:620px;margin:18px auto 0;color:var(--muted);font-size:clamp(17px,2.4vw,20px)}
+  .pill{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);
+    color:var(--ink);padding:7px 14px;border-radius:999px;font-size:14px;font-weight:600;margin-bottom:24px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .cta{display:inline-block;margin-top:30px;background:var(--accent);color:#fff;font-weight:700;
+    padding:16px 30px;border-radius:16px;font-size:17px;box-shadow:0 10px 24px rgba(232,65,42,.3);transition:.15s}
+  .cta:hover{background:var(--accent2);transform:translateY(-1px)}
+  .cta-note{display:block;margin-top:12px;color:var(--muted);font-size:13px}
+
+  /* stat band */
+  .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:8px 0 8px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 26px;min-width:150px;text-align:center}
+  .stat b{display:block;font-size:30px;color:var(--accent);font-weight:850;font-variant-numeric:tabular-nums}
+  .stat span{color:var(--muted);font-size:14px}
+
+  /* before/after */
+  .ba{max-width:520px;margin:54px auto 0;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px}
+  .ba .row{margin:10px 0}
+  .ba .lbl{font-size:13px;color:var(--muted);margin-bottom:6px}
+  .bar{height:42px;border-radius:12px;display:flex;align-items:center;padding:0 14px;font-weight:700;font-variant-numeric:tabular-nums}
+  .bar.before{background:#ECE9E2;color:var(--ink)}
+  .bar.after{background:var(--accent);color:#fff;width:24%}
+
+  /* sections */
+  section{padding:56px 0}
+  h2{font-size:clamp(26px,4vw,36px);text-align:center;letter-spacing:-.02em;font-weight:850}
+  .lead{text-align:center;color:var(--muted);max-width:620px;margin:12px auto 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:38px}
+  .feature{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px}
+  .feature .ic{width:44px;height:44px;border-radius:12px;background:rgba(232,65,42,.1);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+  .feature h3{font-size:18px;margin-bottom:6px}
+  .feature p{color:var(--muted);font-size:15px}
+
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:38px}
+  .step{text-align:center;padding:10px}
+  .step .n{width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;
+    display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+
+  /* privacy */
+  .privacy{background:var(--ink);color:#F0EFEA;border-radius:28px;padding:48px 30px;text-align:center;margin:20px 0}
+  .privacy h2{color:#fff}
+  .privacy p{color:#bdb9b1;max-width:560px;margin:12px auto 0}
+
+  footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--muted);font-size:14px}
+  footer a{color:var(--muted);margin:0 10px}
+  footer a:hover{color:var(--ink)}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <span class="pill">Compacto</span>
-  <h1>Legal</h1>
-  <p class="muted">On-device PDF compressor</p>
-  <a class="btn" href="./privacy.html">Privacy Policy →</a>
-  <a class="btn" href="./terms.html">Terms of Use →</a>
+
+  <nav>
+    <div class="brand"><img src="icon.png" alt="Compacto"> Compacto</div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <img class="icon" src="icon.png" alt="Compacto icon">
+    <div><span class="pill"><span class="dot"></span> 100% on-device · no uploads</span></div>
+    <h1>Shrink your PDFs.<br>Nothing leaves your phone.</h1>
+    <p class="sub">Compacto compresses PDFs entirely on your iPhone — no servers, no internet, no waiting. Just smaller files with crisp, readable quality.</p>
+    <a class="cta" href="#">Download on the App Store</a>
+    <span class="cta-note">Coming soon · iPhone · iOS 17+</span>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><b>−83%</b><span>typical scan savings</span></div>
+    <div class="stat"><b>100%</b><span>processed on-device</span></div>
+    <div class="stat"><b>0</b><span>files uploaded</span></div>
+  </div>
+
+  <div class="ba">
+    <div class="row"><div class="lbl">Before</div><div class="bar before">12.4 MB</div></div>
+    <div class="row"><div class="lbl">After</div><div class="bar after">2.1 MB</div></div>
+  </div>
+
+  <section id="features">
+    <h2>Built for real documents</h2>
+    <p class="lead">Scans, contracts, photos, forms — Compacto makes them small enough to email, without the cloud.</p>
+    <div class="grid">
+      <div class="feature"><div class="ic">🔒</div><h3>Fully offline</h3><p>Your files never leave the device. No account, no servers, complete privacy.</p></div>
+      <div class="feature"><div class="ic">⚡</div><h3>Instant</h3><p>Compression runs locally in seconds — even with no internet connection.</p></div>
+      <div class="feature"><div class="ic">🎯</div><h3>Quality presets</h3><p>High, Recommended, Maximum, or custom DPI &amp; quality. See the estimate before you compress.</p></div>
+      <div class="feature"><div class="ic">🖼️</div><h3>Photos → PDF</h3><p>Turn photos into a single compressed PDF, ready to share.</p></div>
+      <div class="feature"><div class="ic">📚</div><h3>Batch &amp; history</h3><p>Compress many files at once and find every result in your history.</p></div>
+      <div class="feature"><div class="ic">📥</div><h3>Open from anywhere</h3><p>Share a PDF from Mail, Safari or Files straight into Compacto.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Three taps</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Add a PDF</h3><p>From Files, Photos, or the share sheet.</p></div>
+      <div class="step"><div class="n">2</div><h3>Pick quality</h3><p>See the estimated size for each preset.</p></div>
+      <div class="step"><div class="n">3</div><h3>Save or share</h3><p>Smaller file, same readable quality.</p></div>
+    </div>
+  </section>
+
+  <div class="privacy">
+    <h2>Privacy by design</h2>
+    <p>Compacto has no servers that can see your documents. Everything — every page, every image — is compressed right on your iPhone. The only thing that leaves is the file you choose to share.</p>
+  </div>
+
 </div>
+
+<footer>
+  <div class="wrap">
+    <a href="privacy.html">Privacy Policy</a> ·
+    <a href="terms.html">Terms of Use</a> ·
+    <a href="mailto:jrkral2@gmail.com">Contact</a>
+    <p style="margin-top:12px">© 2026 Compacto · On-device PDF compressor</p>
+  </div>
+</footer>
 </body>
 </html>
